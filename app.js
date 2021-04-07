@@ -39,7 +39,14 @@ function renderCafe(doc){
 //first create the collection name in the firestore database on the firebase website. 
 //using collection() will get all the documents  
 //the get() give back a snapshot, a data that is async 
-db.collection('cafes').get()
+//using the where() to get more specific data
+//db.collection('cafes').where('city', '==', 'Underground').get()
+//the where() takes three parameters: a field to filter on, a comparison operator, and a value.
+//using the orderBy() to sort the data
+//db.collection('cafes').where('city', '==', 'Underground').orderBy('name').get() 
+//complex sort give us an index error, fix by clicking on console error to redirect to firestore, 
+//under the firestore indexes, create new index
+db.collection('cafes').where('city', '==', 'Underground').orderBy('name').get()
     .then((snapshot) => {
         //snapshot.docs will get you the array of all the documents 
         //console.log(snapshot.docs)
