@@ -12,7 +12,11 @@
 
         <div class="content">
 
-            <form id="add-cafe-form"></form>
+            <form id="add-cafe-form">
+                <input type="text" name="name" placeholder="Cafe Name">
+                <input type="text" name="city" placeholder="Cafe City">
+                <button>Add Cafe</button>
+            </form>
 
             <ul id="cafe-list"></ul>
 
@@ -35,6 +39,8 @@
             };
             // Initialize Firebase
             firebase.initializeApp(firebaseConfig);
+
+            //create a const for firestore so we can use it to access the database
             const db = firebase.firestore()
             db.settings({ timestampsInSnapshots: true })
         </script>
