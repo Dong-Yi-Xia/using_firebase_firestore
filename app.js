@@ -83,7 +83,7 @@ function renderCafe(doc){
 //onSnapshot is a eventListener
 //you can use onSnapshot() instead of get() to listen to the results of a query.
 //snapshot handler will receive a new query snapshot every time the query results change
-db.collection('cafes').orderBy('city').onSnapshot(snapshot => {
+db.collection('cafes').orderBy('name').onSnapshot(snapshot => {
     //docChanges() allows actual changes to query results between query snapshots
     //there will be a property called type that will have added or removed or modified
     let changes = snapshot.docChanges()
