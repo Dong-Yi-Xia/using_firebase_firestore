@@ -42,6 +42,7 @@ li:nth-child(even){
 
 li span{
     display: block;
+    width: fit-content;
 }
 
 li span:nth-child(2){
@@ -99,4 +100,14 @@ button{
     font-family: ubuntu;
     letter-spacing: 1px;
     color: #999;
+}
+
+.update-btn{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+span:hover{
+    cursor: pointer;
 }
