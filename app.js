@@ -46,16 +46,36 @@ function renderCafe(doc){
 //db.collection('cafes').where('city', '==', 'Underground').orderBy('name').get() 
 //complex sort give us an index error, fix by clicking on console error to redirect to firestore, 
 //under the firestore indexes, create new index
-db.collection('cafes').where('city', '==', 'Underground').orderBy('name').get()
-    .then((snapshot) => {
-        //snapshot.docs will get you the array of all the documents 
-        //console.log(snapshot.docs)
-        snapshot.docs.forEach(doc => {
-            //using the data() will give you the actual data, its field property
-            // console.log(doc.data())
-            renderCafe(doc)
-        })
+
+// db.collection('cafes').orderBy('name').get()
+//     .then((snapshot) => {
+//         //snapshot.docs will get you the array of all the documents 
+//         //console.log(snapshot.docs)
+//         snapshot.docs.forEach(doc => {
+//             //using the data() will give you the actual data, its field property
+//             // console.log(doc.data())
+//             renderCafe(doc)
+//         })
+//     })
+
+
+// Real Time Listener GETTING DATA
+//onSnapshot is a eventListener
+db.collection('cafes').orderBy('city').onSnapshot(snapshot => {
+    let changes = snapshot.docChanges()
+    // there will be a property called type that will have added or removed
+    // console.log(changes)
+    changes.forEach(change => {
+        // console.log(change.doc.data())
+        if(change.type == 'added'){
+            renderCafe(change.doc)
+        } else if(change.type == 'removed'){
+            //find the attribute of data-id
+            let li = cafeList.querySelector(`[data-id=${change.doc.id}]` )
+            cafeList.removeChild(li)
+        }
     })
+})
 
 
 // SAVING DATA    
@@ -70,3 +90,5 @@ form.addEventListener('submit', (evt) => {
     form.name.value = ''
     form.city.value = ''
 })
+
+
